@@ -1,0 +1,301 @@
+:root {
+  --pink: #ffb3c6;
+  --pink-soft: #ffe1ec;
+  --vanilla: #fff8ec;
+  --purple: #d6c2f2;
+  --purple-deep: #b89bdb;
+  --gold: #f4cf8e;
+  --text-dark: #5a4a52;
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 1. Lock the screen entirely! No more scrolling the webpage. */
+html, body, #root, .app-root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; 
+}
+
+body {
+  font-family: 'Quicksand', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(160deg, #fdf3f7 0%, #f6ecff 50%, #fff8ec 100%);
+  color: var(--text-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Ambient background orbs                                                    */
+/* -------------------------------------------------------------------------- */
+
+.ambient-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.orb-1 { width: 260px; height: 260px; background: var(--pink); top: -60px; left: -80px; animation: float1 18s ease-in-out infinite; }
+.orb-2 { width: 320px; height: 320px; background: var(--purple); top: 20%; right: -120px; animation: float2 22s ease-in-out infinite; }
+.orb-3 { width: 200px; height: 200px; background: var(--gold); bottom: 10%; left: -60px; animation: float3 20s ease-in-out infinite; }
+.orb-4 { width: 240px; height: 240px; background: var(--pink-soft); bottom: -80px; right: 10%; animation: float1 26s ease-in-out infinite reverse; }
+.orb-5 { width: 180px; height: 180px; background: var(--purple-deep); top: 45%; left: 35%; opacity: 0.3; animation: float2 24s ease-in-out infinite; }
+
+@keyframes float1 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(60px, 80px) scale(1.15); } }
+@keyframes float2 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-70px, 50px) scale(0.9); } }
+@keyframes float3 { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(40px, -60px) scale(1.2); } }
+
+/* -------------------------------------------------------------------------- */
+/* Canvas stage (Now 100% Full Screen)                                        */
+/* -------------------------------------------------------------------------- */
+
+.canvas-stage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.canvas-stage canvas {
+  display: block;
+  touch-action: none;
+}
+
+.title-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 0;
+  text-align: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.title-banner h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #8a5d7a;
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
+}
+
+.title-banner p {
+  margin: 4px 0 0;
+  font-size: 0.85rem;
+  color: #a987a8;
+  font-weight: 500;
+}
+
+/* --- Floating Bottom Sheet Menu --- */
+
+.ui-bottom-sheet {
+  position: fixed;
+  bottom: 24px;
+  /* Replaced left: 0 so it naturally centers itself */
+  left: 0;
+  right: 0;
+  margin: 0 auto; 
+  width: max-content; /* This makes it drag cleanly as a tight block */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none; 
+}
+
+/* The new Toggle Button style */
+.menu-toggle-btn {
+  pointer-events: auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 2px solid var(--glass-border);
+  padding: 10px 24px;
+  border-radius: 999px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  color: #8a5d7a;
+  box-shadow: 0 8px 24px rgba(180, 140, 180, 0.25);
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: background 0.2s;
+}
+
+.menu-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.ui-panel-inner {
+  pointer-events: auto;
+  width: calc(100vw - 32px); /* Changed to 100vw to keep it responsive while dragged */
+  max-width: 500px;
+  max-height: 65vh;        
+  overflow-y: auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(180, 140, 180, 0.18), inset 0 1px 0 rgba(255,255,255,0.6);
+  margin: 0 auto;
+}
+
+/* Custom Scrollbar for the menu */
+.ui-panel-inner::-webkit-scrollbar {
+  width: 6px;
+}
+.ui-panel-inner::-webkit-scrollbar-thumb {
+  background-color: rgba(180, 140, 180, 0.4);
+  border-radius: 10px;
+}
+
+.panel-section { margin-bottom: 20px; }
+.panel-section:last-child { margin-bottom: 0; }
+.panel-section h2 { margin: 0 0 10px; font-size: 0.95rem; font-weight: 700; color: #8a5d7a; letter-spacing: 0.3px; }
+.section-header { display: flex; justify-content: space-between; align-items: center; }
+
+.scoop-counter {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #b89bdb;
+  background: rgba(216, 194, 242, 0.3);
+  padding: 3px 10px;
+  border-radius: 999px;
+}
+
+/* Vessel buttons */
+.vessel-row { display: flex; gap: 10px; }
+.vessel-btn {
+  flex: 1; padding: 12px; border-radius: 16px; border: 2px solid rgba(216, 194, 242, 0.4);
+  background: rgba(255, 255, 255, 0.6); font-size: 0.9rem; font-weight: 600;
+  color: var(--text-dark); cursor: pointer; transition: all 0.2s;
+}
+.vessel-btn.active {
+  background: linear-gradient(135deg, var(--pink-soft), var(--purple));
+  border-color: var(--purple-deep); color: #6a4a72; box-shadow: 0 4px 14px rgba(216, 194, 242, 0.4);
+}
+
+/* Flavor grid */
+.flavor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 420px) { .flavor-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.flavor-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px;
+  border-radius: 16px; border: 2px solid rgba(0,0,0,0.05); background: rgba(255, 255, 255, 0.65);
+  cursor: pointer; font-size: 0.78rem; font-weight: 600; color: var(--text-dark);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.flavor-btn:active:not(:disabled) { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.flavor-swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+.flavor-emoji { font-size: 1rem; margin-top: -22px; }
+.flavor-label { margin-top: 2px; }
+
+/* Finishing touches */
+.finish-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.finish-btn {
+  flex: 1; min-width: 100px; padding: 11px 8px; border-radius: 14px; border: none;
+  background: rgba(255, 255, 255, 0.65); font-size: 0.8rem; font-weight: 600;
+  color: var(--text-dark); cursor: pointer; box-shadow: inset 0 0 0 2px rgba(0,0,0,0.04);
+}
+.finish-btn.active {
+  background: linear-gradient(135deg, #ffd6e8, var(--gold)); color: #7a4a3a;
+  box-shadow: 0 4px 14px rgba(244, 207, 142, 0.4);
+}
+.finish-btn-reset { background: rgba(216, 194, 242, 0.35); }
+
+/* -------------------------------------------------------------------------- */
+/* Smile FAB + toast (Moved to top right)                                     */
+/* -------------------------------------------------------------------------- */
+
+.smile-fab {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #ffb3c6, #d6c2f2);
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(216, 140, 180, 0.45);
+}
+
+.smile-fab-icon { font-size: 1.1rem; }
+
+@media (max-width: 380px) {
+  .smile-fab-text { display: none; }
+  .smile-fab { padding: 14px; }
+}
+
+.toast {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 88%;
+  padding: 12px 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: 0 10px 30px rgba(180, 140, 180, 0.3);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #8a5d7a;
+  text-align: center;
+}
+
+.toast-emoji { font-size: 1.1rem; }
+
+/* -------------------------------------------------------------------------- */
+/* Butterfly cursor layer                                                     */
+/* -------------------------------------------------------------------------- */
+
+.cursor-layer { position: fixed; inset: 0; z-index: 50; pointer-events: none; overflow: hidden; }
+.cursor-particle { position: absolute; transform: translate(-50%, -50%); }
+.glow-dot { width: 10px; height: 10px; border-radius: 50%; filter: blur(2px); box-shadow: 0 0 12px 4px currentColor; }
+
+/* -------------------------------------------------------------------------- */
+/* Invisible Drag Boundary Fence                                              */
+/* -------------------------------------------------------------------------- */
+
+.drag-boundary {
+  position: fixed;
+  /* Top is set to 25vh to protect the upper quarter of the screen so the menu cannot cover the main ice cream view */
+  top: 25vh; 
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  pointer-events: none;
+  z-index: 0;
+}
