@@ -138,7 +138,7 @@ function Cherry({ y }) {
 
 function WaffleCone() {
   return (
-    <group position={[0, -1.55, 0]}>
+    <group position={[0, -1.6, 0]}>
       <mesh castShadow receiveShadow rotation={[Math.PI, 0, 0]}>
         <coneGeometry args={[0.72, 1.6, 32, 16, true]} />
         <meshStandardMaterial
