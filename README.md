@@ -1,16 +1,127 @@
-# React + Vite
+# 🍦 Ice Cream Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive web application that allows users to create their own custom ice cream by selecting flavors, cones, toppings, and decorations with instant visual feedback.
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Website:** https://ice-cream-builder-blush.vercel.app/
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🎥 Demo Video
 
-## Expanding the ESLint configuration
+> Replace the placeholder below with your demo video.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+Demo Video Link Here
+```
+
+Example:
+
+```md
+[Watch Demo](c:\Users\anish\Desktop\Ice_cream builder.mp4)
+```
+
+---
+
+## ✨ Features
+
+- Create custom ice cream combinations
+- Choose from different ice cream flavors
+- Select cone styles and designs
+- Add toppings and decorations
+- Real-time visual updates
+- Clean and responsive user interface
+- Interactive user experience
+
+---
+
+## 🛠️ Built With
+
+- React.js
+- JavaScript
+- HTML5
+- CSS3
+- Vercel (Deployment)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have installed:
+
+- Node.js
+- npm
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/CodeWizardAnish/ice-cream-builder.git
+```
+
+Move into the project directory:
+
+```bash
+cd ice-cream-builder
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Start the development server:
+
+```bash
+npm start
+```
+
+Open your browser and visit:
+
+```text
+http://localhost:3000
+```
+
+---
+
+## 📂 Project Overview
+
+Ice Cream Builder is a frontend project focused on creating an engaging and interactive customization experience. Users can experiment with different combinations of flavors and toppings to build their ideal ice cream in a visually appealing interface.
+
+This project demonstrates:
+
+- Component-based architecture
+- State management in React
+- Dynamic UI rendering
+- Responsive web design
+- User-centric interface development
+
+---
+
+## 🔮 Future Enhancements
+
+- Drag-and-drop customization
+- Price calculation system
+- Save favorite creations
+- User authentication
+- Dark mode support
+- Online ordering functionality
+
+---
+
+## 👨‍💻 Developer
+
+**Anish Raj**
+
+B.Tech CSE Student | Web Development Enthusiast
+
+---
+
+## ⭐ Support
+
+If you found this project interesting, consider giving it a star on GitHub.
