@@ -13,10 +13,8 @@ An interactive web application that allows users to create their own custom ice 
 ```md
 ## 🎥 Demo Visual
 
-[Watch Demo]
-<img width="1890" height="896" alt="thumbnail" src="https://github.com/user-attachments/assets/ca3db052-056d-4f9d-8740-f3081ba87e87" />
-
 ```
+<img width="1890" height="896" alt="thumbnail" src="https://github.com/user-attachments/assets/1413b4da-fc71-4e66-a432-f0af872b813b" />
 
 ---
 
