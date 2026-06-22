@@ -8,20 +8,14 @@ An interactive web application that allows users to create their own custom ice 
 
 ---
 
-## 🎥 Demo Video
-
-> Replace the placeholder below with your demo video.
-
-```text
-Demo Video Link Here
-```
-
-Example:
+## 🎥 Demo Visuals
 
 ```md
-## 🎥 Demo Video
+## 🎥 Demo Visual
 
-[Watch Demo](./Demo/Ice_cream_builder.mp4)
+[Watch Demo]
+<img width="1890" height="896" alt="thumbnail" src="https://github.com/user-attachments/assets/ca3db052-056d-4f9d-8740-f3081ba87e87" />
+
 ```
 
 ---
