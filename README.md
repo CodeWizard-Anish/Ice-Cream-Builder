@@ -19,7 +19,9 @@ Demo Video Link Here
 Example:
 
 ```md
-[Watch Demo](c:\Users\anish\Desktop\Ice_cream builder.mp4)
+## 🎥 Demo Video
+
+[Watch Demo](./Demo/Ice_cream_builder.mp4)
 ```
 
 ---
